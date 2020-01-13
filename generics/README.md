@@ -168,3 +168,4 @@ print(shoeTrunk.retrieve(index: 0).brand)
 
 - [Apple Generics](https://docs.swift.org/swift-book/LanguageGuide/Generics.html)
 - [Learn App Making](https://learnappmaking.com/generics-swift-how-to/)
+- [Performance Differences Between Protocols and Generics - Advanced](https://developer.apple.com/videos/play/wwdc2016/416/)
