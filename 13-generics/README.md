@@ -43,7 +43,19 @@ The **constraint** (in this case Numeric) limits the type of objects that can be
  - `Numeric` and `SignedNumeric` for values that are numbers, like 42 and 3.1415
  - `Strideable` for values that can offset and measured, like sequences, steps and ranges
  
-## How to your read them
+## Different ways of applying constraints
+
+There is more than one way of constraining a type on a generic. Depending on which elements you want to apply the constraint, you can either do it directly on the struct, via an extension, or by type directly on the extension itself.
+
+```swift
+struct Stack<Element:Equatable> { // Every element in Stack must be equatable
+
+extension Container where Item: Equatable { // Only Items in this extension must be equatable
+
+extension Container where Item == Double { // Only items in this extension must be of type double
+```
+ 
+## How to read them
 
 ```swift
 func addition<T: Numeric>(a: T, b: T) -> T
