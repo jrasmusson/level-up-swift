@@ -38,7 +38,7 @@ print("\(x.data), \(y.data)")      // prints "42, 42"
 
 So why does any of this matter? I matters a lot because accessing memory on the stack (where values are stored) is much faster than pulling things off the heap (where references are stored).
 
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/functional/images/stack-vs-heap.png" alt="drawing" width="600"/>
+<img src="https://github.com/jrasmusson/level-up-swift/blob/master/8-structs-vs-classes/images/stack-vs-heap.png" alt="drawing" width="600"/>
 
 This is why Swift is so big on constants, Structs, Enums, and not so big on Classes. When we code with constructs that can be stored on the Heap, creating and destroying objects isn’t only safer, it’s faster and cheaper.
 
