@@ -39,6 +39,7 @@ It’s for safety, speed, and fewer side-effects.
 
 ### Links that help
 
+- [WWDC Video](https://developer.apple.com/videos/play/wwdc2016/416/)
 - [StackOverflow](https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap)
 - [Apple Value and Reference Types](https://developer.apple.com/swift/blog/?id=10)
 
