@@ -8,31 +8,17 @@ In this section we are going to look at
  - Why the distinction is important
  - How this manifests around best practices in the Swift language
 
-## Passing by value
+## Value types are stored on the Stack
 
-Passed by value (the default in Swift) means you get a copy of whatever data you are working with.
+Values types like structs and enums get stored on the Stack. When assign a struct to another variable, you get a copy of the original, both get stored on the stack. If you change one, you don't affect the other. This is much safer and have fewer side effects than passing by reference.
 
-```swift
-// Pass by value
-struct S { var data: Int = -1 }
-var a = S()
-var b = a                          // a is copied to b
-a.data = 42                        // Changes a, not b
-print("\(a.data), \(b.data)")      // prints "42, -1"
-```
+<img src="https://github.com/jrasmusson/level-up-swift/blob/master/8-structs-vs-classes/images/stack.png" alt="drawing" width="600"/>
 
-## Pass by reference 
+## Reference types are stored on the Heap
 
 When you pass by reference you are passing a pointer to an object in memory, and when you change that instance in memory, you change it for everyone pointing to it.
 
-```swift
-// Pass by reference
-class C { var data: Int = -1 }
-var x = C()
-var y = x                          // x is copied to y
-x.data = 42                        // changes the instance referred to by x (and y)
-print("\(x.data), \(y.data)")      // prints "42, 42"
-```
+<img src="https://github.com/jrasmusson/level-up-swift/blob/master/8-structs-vs-classes/images/heap.png" alt="drawing" width="600"/>
 
 ## Stack vs Heap
 
