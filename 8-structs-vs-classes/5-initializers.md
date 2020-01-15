@@ -101,7 +101,16 @@ struct Attachment {
    let uuid: String
    let mimeType: String
    
-   init?(fileURL: URL, uuid: String, 
+   init?(fileURL: URL, uuid: String, mimeType: String) {
+      guard mimeType.isMimeType else { return nil }
+      
+      self.fileURL = fileURL
+      self.uuid = uuid
+      self.mimeType = mimeType
+   }
+}
+```
+   
 ### Links that help
 
 - [Swift Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html)
