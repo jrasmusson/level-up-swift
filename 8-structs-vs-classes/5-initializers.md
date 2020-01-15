@@ -91,6 +91,17 @@ bearQuestion.ask()
 bearQuestion.response = "Black bear is best."
 ```
 
+## Failable initializers
+
+Swift has the ability to fail initialization (return a nil). Say for example you only want to create an attachment for specific supported mimeTypes. You could do it like this.
+
+```swift
+struct Attachment {
+   let fileURL: URL
+   let uuid: String
+   let mimeType: String
+   
+   init?(fileURL: URL, uuid: String, 
 ### Links that help
 
 - [Swift Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html)
