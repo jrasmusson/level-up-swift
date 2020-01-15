@@ -82,6 +82,24 @@ Here is an enum called `Character`, that describes an embedded enum (`Weapon`) b
 Another thing enums can do is initialize themselves.
 
 ```swift
+enum MimeType {
+    init?(rawValue: String) {
+        switch rawValue {
+        case "image/jpeg":
+            self = .jpeg
+        case "image/png":
+            self = .png
+        case "image/gif":
+            self = .gif
+        default:
+            return nil
+        }
+    }
+    case jpeg, png, gif
+}
+```
+
+```swift
 enum IntCategory {
     case small
     case medium
