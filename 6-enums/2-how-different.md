@@ -195,6 +195,12 @@ enum Device {
     case iPhone
     case iPad
 }
+
+enum MimeType {
+    case jpeg = "image/jpeg"
+    case png = "image/png"
+    case gif = "image/gif"
+}
 ```
 
 Predefined state is when you know all the states a collection of data can be in, and you are looking for a convenient means of grouping them together.
