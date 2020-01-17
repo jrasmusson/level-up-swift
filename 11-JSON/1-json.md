@@ -62,11 +62,12 @@ let userResult = try! JSONDecoder().decode(User.self, from: jsonUserData)
 
 ## Codable types
 
-URL, Number, Bool, Array, Dictionary Date, Null, and other JSON objects are all Codable types.
+URL, Number, Bool, Array, Dictionary, Enum, Date, Null, and all other custom Codable types.
 
 ```swift
+import Foundation
 
-let jsonOtherTypes = """
+let json = """
  {
      "name": "The Witcher",
      "seasons": 1,
@@ -78,6 +79,7 @@ let jsonOtherTypes = """
          "name": "Netflix",
          "ceo": "Reed Hastings"
      },
+    "mobile": "ios",
     "url":"https://en.wikipedia.org/wiki/BoJack_Horseman"
  }
 """
@@ -90,17 +92,24 @@ struct Show: Decodable {
     let genres: [String]
     let countries: Dictionary<String, String>
     let platform: Platform
+    let mobile: Mobile
     let url: URL
     
     struct Platform: Decodable {
         let name: String
         let ceo: String
     }
+
+    enum Mobile: String, Codable {
+        case ios
+        case android
+    }
 }
 
-let jsonOtherData = jsonOtherTypes.data(using: .utf8)!
-let showResult = try! JSONDecoder().decode(Show.self, from: jsonOtherData)
-print(showResult)
+let data = json.data(using: .utf8)!
+let result = try! JSONDecoder().decode(Show.self, from: data)
+result.platform.ceo
+result.mobile
 ```
 
 ## Dates
