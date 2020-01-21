@@ -16,12 +16,13 @@ import UIKit
  */
 
 // The problem with classes
-// - implicit sharing
+// - implicit sharing (whole mutability problem)
+// - deep complex object graphs (show UIKit WWDC bob blog)
 
 class AA {}
 class BB: AA {}
 
-// which causes us to:
+// which causes us get very defensive with our codeto:
 
 /*
  Defensive copying
@@ -35,49 +36,22 @@ class BB: AA {}
  Bugs!
  */
 
-// And you can see examples of this in Cocoa
+// Even Apple libraries are affected by this (show WWDC 2015 collections mutability comment)
 
-// We can do it, just not that great
+// So when Chris Lattner and others created Swift, they wanted to get away from all this.
+// Wanted a way of sharing code and reused that was
+// - safe (value types)
+// - fast (highly optimized compiler)
+// - easy to use (flat hierarchies over deep)
 
 // What is POP
 
 // POP is how Swift does classical OO inheritance in a performance safe way
+// - uses protocols (blue prints) for defining what
+// - lets structs and enums implement (the how)
+// - enables very fine grained APIs shallow simpler to reason about
 
-// We start by defining a protocol
-
-protocol Foo {}
-protocol Bar{}
-
-// we then implement in enums or structs
-struct Baz: Foo, Bar {}
-
-// and we extend and resuse via extensions
-extension Foo {
-    func handle() {}
-}
-
-// That's it!
-
-// same output. same functionality. in a safer, more functional, more efficient way
-// value types get stored on the stack
-// safer because we get all the immutability that comes with Functional programming types
-
-// Now you may be wondering...
-// Why cant structs inherit from each other in Swift?
-
-// struct A {}
-// struct B: A {} // Boom!
-
-// Several reasons
-// - Performance - structs and enums can be better optimized and inlined by the compiler
-// - Safety - you can't mess up your parent by messing with your children (invariants)
-// - Can of worms - gets complicated...
-
-// https://forums.swift.org/t/why-cant-structs-inherit-from-other-structs/3647/2
-
-// Examples
-
-// Say we need a type called Entity that was want all types to conform to. Start with a protocol.
+// How it works
 
 // Start with a Protocol
 
@@ -106,16 +80,18 @@ struct Order: Entity {
 let order = Order(name: "My Order")
 print(order.uid)
 
-// And further requirements via inheritance
+// Add further requirements by extending existing protocols (Swift version of inheritance).
 
 protocol Persistable: Entity {
     func write(instance: Entity, to filePath: String)
     init?(by uid: String)
 }
 
-// Protocols can inherit other protocols and add further requirements on top of the ones they already inherit
+// Note: You can do this with any type (Int, Double, other library). You don't need the source code.
 
-// Types that implement the Perishable protocol must conform to Perishable and Entity
+// Then you only implement what you need - fine grained shallow interfaces
+
+// The whole thing
 
 struct PersistableEntity: Persistable {
     var name: String
@@ -127,34 +103,13 @@ struct PersistableEntity: Persistable {
     }
 }
 
-// But implement only those protocols you need for specific types
+// Just a part
 
 struct InMemoryEntity: Entity {
     var name: String
 }
 
-// This is powerful! Allows for more granular and flexible designs. Enabling you to compose new entities based on only requirements you need and like.
-
-struct MyEntity: Entity, Equatable, CustomStringConvertible {
-    var name: String
-    // Equatable
-    public static func ==(lhs: MyEntity, rhs: MyEntity) -> Bool {
-        return lhs.name == rhs.name
-    }
-    // CustomStringConvertible
-    public var description: String {
-        return "MyEntity: \(name)"
-    }
-}
-let entity1 = MyEntity(name: "42")
-print(entity1)
-let entity2 = MyEntity(name: "42")
-assert(entity1 == entity2, "Entities shall be equal")
-
-
-// Comparing Classical with POP
-
-
+// An example in an App
 
 // Summary
 
@@ -180,3 +135,5 @@ assert(entity1 == entity2, "Entities shall be equal")
 
 // Work through this...
 // https://www.bobthedeveloper.io/blog/protocol-oriented-programming-view-in-swift
+// Image OOP
+// https://blog.bobthedeveloper.io/introduction-to-protocol-oriented-programming-in-swift-b358fe4974f#.koyj2ap8d

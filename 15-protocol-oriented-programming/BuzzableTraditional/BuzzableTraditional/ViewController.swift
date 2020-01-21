@@ -10,8 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let textField: UITextField = {
-        let textField = UITextField()
+    let textField: BuzzableTextField = {
+        let textField = BuzzableTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.preferredFont(forTextStyle: .title1)
         textField.textAlignment = .center
@@ -21,14 +21,15 @@ class ViewController: UIViewController {
         return textField
     }()
 
-    var button: UIButton = {
-        let button = UIButton()
+    var button: BuzzableButton = {
+        let button = BuzzableButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         button.backgroundColor = .systemBlue
         button.contentEdgeInsets = UIEdgeInsets.init(top: 8, left: 16, bottom: 8, right: 16)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
         return button
     }()
@@ -59,10 +60,16 @@ class ViewController: UIViewController {
         button.widthAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
     }
 
-    // MARK: - Textfield
-
+    // MARK: - Textfield actions
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true) // gives up keyboard on touch
+    }
+
+    // MARK: - Button actions
+    @objc func buttonPressed(sender: UIButton!) {
+        textField.buzz()
+        button.buzz()
+        button.fade()
     }
 }
 

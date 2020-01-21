@@ -11,6 +11,8 @@
 		71EE836C23D731EE00A802C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EE836B23D731EE00A802C6 /* ViewController.swift */; };
 		71EE837123D731F000A802C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71EE837023D731F000A802C6 /* Assets.xcassets */; };
 		71EE837423D731F000A802C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71EE837223D731F000A802C6 /* LaunchScreen.storyboard */; };
+		71EE837C23D73A9800A802C6 /* Buzzable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EE837B23D73A9800A802C6 /* Buzzable.swift */; };
+		71EE838023D73CED00A802C6 /* Fadeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EE837F23D73CED00A802C6 /* Fadeable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		71EE837023D731F000A802C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71EE837323D731F000A802C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71EE837523D731F000A802C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71EE837B23D73A9800A802C6 /* Buzzable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buzzable.swift; sourceTree = "<group>"; };
+		71EE837F23D73CED00A802C6 /* Fadeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fadeable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				71EE837023D731F000A802C6 /* Assets.xcassets */,
 				71EE837223D731F000A802C6 /* LaunchScreen.storyboard */,
 				71EE837523D731F000A802C6 /* Info.plist */,
+				71EE837B23D73A9800A802C6 /* Buzzable.swift */,
+				71EE837F23D73CED00A802C6 /* Fadeable.swift */,
 			);
 			path = BuzzableTraditional;
 			sourceTree = "<group>";
@@ -131,6 +137,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71EE838023D73CED00A802C6 /* Fadeable.swift in Sources */,
+				71EE837C23D73A9800A802C6 /* Buzzable.swift in Sources */,
 				71EE836C23D731EE00A802C6 /* ViewController.swift in Sources */,
 				71EE836823D731EE00A802C6 /* AppDelegate.swift in Sources */,
 			);
