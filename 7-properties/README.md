@@ -183,6 +183,19 @@ let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
 fourByFiveByTwo.volume
 ```
 
+### Working with UIKit and Classes
+
+A subtle for confusing point is why you can define UIKit variables as `let` and then modify them later. Shouldn't they be vars?
+
+```swift
+let highLimitLabel = UILabel()
+highLimitLabel.text = "\(limit) GB"
+```
+
+The reason why this is OK is because the reference to the label is a let (meaning it can never change) but the label itself is not a value type construct (struct or enum). It is a class. Which is mutable.
+
+So even they you define the reference to a class as a let, you can still mutate it because it is a reference type - and not a value type.
+
 ## Property Wrappers
 
 Adds a layer of separation between code that manages how a property is stored and the code that defines a property.
