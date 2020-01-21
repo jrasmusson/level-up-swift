@@ -7,23 +7,22 @@ import UIKit
 
 /*
  - new way of looking at tradional OO programming
- - instead of traditional inhertiance
-  - expensive / unsafe
- - need a way of sharing common code via enums and structs (preferred values types in Swift)
- - POP is Swifts way of doing that
- - by rely on new concepts: protocol extensions, inheritance, composition
- - we get all the speed and safety of immutable data and functional programming with value types
- - why also being able to do inheritiance, shared code resue, in an elegant, performant way
+ - instead of reling on traditional inhertiance for reuse
+ - Swift relies more heavily on protocols and extensions
+  - this avoids many of the pitfalls that come with traditional OO
+  - is safer because avoids mutability
+  - more performant because value semantics are used over reference
+  - lets dive deeper and see how it works
  */
 
-// The problem with classes and traditional inheritiance
-
-// Traditional OO inheritance has some problems
+// The problem with classes
+// - implicit sharing
 
 class AA {}
 class BB: AA {}
 
-// which suffers from:
+// which causes us to:
+
 /*
  Defensive copying
  Inefficiency
@@ -35,6 +34,8 @@ class BB: AA {}
  Complexity
  Bugs!
  */
+
+// And you can see examples of this in Cocoa
 
 // We can do it, just not that great
 
@@ -55,6 +56,8 @@ extension Foo {
     func handle() {}
 }
 
+// That's it!
+
 // same output. same functionality. in a safer, more functional, more efficient way
 // value types get stored on the stack
 // safer because we get all the immutability that comes with Functional programming types
@@ -66,9 +69,9 @@ extension Foo {
 // struct B: A {} // Boom!
 
 // Several reasons
-// - Performance
-// - Safety
-// - Can of worms
+// - Performance - structs and enums can be better optimized and inlined by the compiler
+// - Safety - you can't mess up your parent by messing with your children (invariants)
+// - Can of worms - gets complicated...
 
 // https://forums.swift.org/t/why-cant-structs-inherit-from-other-structs/3647/2
 
@@ -151,137 +154,7 @@ assert(entity1 == entity2, "Entities shall be equal")
 
 // Comparing Classical with POP
 
-// Here is classical
 
-class Image {
-    fileprivate var imageName: String
-    fileprivate var imageData: Data
-
-    var name: String {
-        return imageName
-    }
-
-    init(name: String, data: Data) {
-        imageName = name
-        imageData = data
-    }
-
-    // persistence
-    func save(to url: URL) throws {
-        try self.imageData.write(to: url)
-    }
-
-    convenience init(name: String, contentsOf url: URL) throws {
-        let data = try Data(contentsOf: url)
-        self.init(name: name, data: data)
-    }
-
-    // compression
-    convenience init?(named name: String, data: Data, compressionQuality: Double) {
-        guard let image = UIImage.init(data: data) else { return nil }
-        guard let jpegData = image.jpegData(compressionQuality: CGFloat(compressionQuality)) else { return nil }
-        self.init(name: name, data: jpegData)
-    }
-
-    // BASE64 encoding
-    var base64Encoded: String {
-        return imageData.base64EncodedString()
-    }
-}
-
-// Test
-var image = Image(name: "Pic", data: Data(repeating: 0, count: 100))
-print(image.base64Encoded)
-
-do {
-    // persist image
-    let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
-    let imageURL = documentDirectory.appendingPathComponent("MyImage")
-    try image.save(to: imageURL)
-    print("Image saved successfully to path \(imageURL)")
-
-    // load image from persistence
-    _ = try Image.init(name: "MyRestoredImage", contentsOf: imageURL)
-    print("Image loaded successfully from path \(imageURL)")
-} catch {
-    print(error)
-}
-
-// So what's the problem? What if you don't need or want all that implementation/coupling/ and dependency?
-// what if you only want an image to persist but not encode?
-
-// Redesign using POP
-
-// Start with a protocol
-
-protocol NamedImageData {
-    var name: String { get }
-    var data: Data { get }
-    init(name: String, data: Data)
-}
-
-protocol ImageDataPersisting: NamedImageData {
-    init(name: String, contentsOf url: URL) throws
-    func save(to url: URL) throws
-}
-
-// Offer default implementations via extensions
-
-extension ImageDataPersisting {
-    init(name: String, contentsOf url: URL) throws {
-        let data = try Data(contentsOf: url)
-        self.init(name: name, data: data)
-    }
-
-    func save(to url: URL) throws {
-        try self.data.write(to: url)
-    }
-}
-
-// Then make new more specific protocols for only those requirements you like
-
-protocol ImageDataCompressing: NamedImageData {
-    func compress(withQuality compressionQuality: Double) -> Self?
-}
-
-extension ImageDataCompressing {
-    func compress(withQuality compressionQuality: Double) -> Self? {
-        guard let uiImage = UIImage.init(data: self.data) else {
-            return nil
-        }
-        guard let jpegData = uiImage.jpegData(compressionQuality: CGFloat(compressionQuality)) else {
-            return nil
-        }
-        return Self(name: self.name, data: jpegData)
-    }
-}
-
-protocol ImageDataEncoding: NamedImageData {
-    var base64Encoded: String { get }
-}
-
-extension ImageDataEncoding {
-    var base64Encoded: String {
-        return self.data.base64EncodedString()
-    }
-}
-
-// See the difference? What these specific protocols you now have more concrete, clearer code more representative of your design
-
-// You can choose to implement / inherit all the functionality
-struct MyImage: ImageDataPersisting, ImageDataCompressing, ImageDataEncoding {
-    var name: String
-    var data: Data
-}
-
-// Or just a few
-struct InMemoryImage: NamedImageData, ImageDataCompressing {
-    var name: String
-    var data: Data
-}
-
-// The best part? You can add this functionality without requiring the orignal code.
-// We can extend any Foundation or UIKit protocol and decorate it however we choose.
 
 // Summary
 
@@ -304,12 +177,6 @@ struct InMemoryImage: NamedImageData, ImageDataCompressing {
 
 
 // Arcade
-
-protocol Queue {
-    var count: Int { get }
-    mutating func push(_ element: Int)
-    mutating func pop() -> Int
-}
 
 // Work through this...
 // https://www.bobthedeveloper.io/blog/protocol-oriented-programming-view-in-swift
