@@ -88,7 +88,7 @@ class HomeController: UIViewController {
 
 It may initially look a little weird, but by defining your stored propery, and setting it equal to a `{}` block followed by closing parenthesis `()` so that it executes, you can created complex objects inlined right when you define them.
 
-### Lazy 
+#### Lazy 
 
 One wrinkle, is if the block you are defining needs acces to `self`, you need to mark the property as `lazy`.
 
@@ -182,6 +182,48 @@ struct Cuboid {
 let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
 fourByFiveByTwo.volume
 ```
+
+### Stored vs Computed Properties (get/Set vs didGet/didSet)
+
+Confusion can naturally occur when it comes to choosing between `get/set` and `didGet/didSet` for stored and computed properties. Here are some rules of thumb.
+
+Use a stored property (`get/set`) when you need the value of the property for processing in other parts of the struct or class.
+
+```swift
+class PercentDataLimitReachedView: UIView {
+    private var _percentUsed = 0
+
+    var percentUsed: Int {
+        get {
+            return _percentUsed
+        }
+        set {
+            _percentUsed = newValue
+        }
+    }
+
+    func log() {
+        print("\(_percentUsed)")
+    }
+}
+```
+
+Use a computed property (`didGet/didSet`) if you are just reacting to a change in property.
+
+```swift
+class PercentDataLimitReachedView: UIView {
+    let label = UILabel()
+
+    // stored property
+    var percentUsed: Int = 0 {
+        didSet {
+            label.text = String(percentUsed)
+            isHidden = !(percentUsed >= 75)
+        }
+    }
+}
+```
+
 
 ### Working with UIKit and Classes
 
