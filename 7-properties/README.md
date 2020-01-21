@@ -193,6 +193,7 @@ Use a stored property (`get/set`) when you need the value of the property for pr
 class PercentDataLimitReachedView: UIView {
     private var _percentUsed = 0
 
+    // computed property
     var percentUsed: Int {
         get {
             return _percentUsed
