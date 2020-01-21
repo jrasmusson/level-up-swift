@@ -185,7 +185,7 @@ fourByFiveByTwo.volume
 
 ### Working with UIKit and Classes
 
-A subtle for confusing point is why you can define UIKit variables as `let` and then modify them later. Shouldn't they be vars?
+A subtle for confusing point is why you can define UIKit variables as `let` and then modify them later. To mutate this label, shouldn't it have to be a `var`?
 
 ```swift
 let highLimitLabel = UILabel()
