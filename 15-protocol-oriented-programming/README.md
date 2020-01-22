@@ -105,7 +105,7 @@ Here is an example.
 
 ### Working wit UIKit
 
-![TableView](https://github.com/jrasmusson/ios-starter-kit/blob/master/basics/UIScrollView/images/demo.gif)
+![TableView](https://github.com/jrasmusson/level-up-swift/blob/master/15-protocol-oriented-programming/images/demo.gif)
 
 The classical OO inheritance way of making the textField and button shake would be to extend `UITextField` and `UIButton` and add the animation code there.
 
