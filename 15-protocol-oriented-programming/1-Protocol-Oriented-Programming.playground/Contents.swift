@@ -3,24 +3,26 @@ import UIKit
 
 // What is POP
 
-// Intro
+/*
+ - POP is a way of sharing code through the mechanics of protocols and extensions
+ while avoiding many of the pitfalls that come with traditional inheritance.
+*/
+
+class A {}
+class B: A {}
+
+protocol AA {}
+extension AA {}
+struct BB: AA {}
 
 /*
- - new way of looking at tradional OO programming
- - instead of reling on traditional inhertiance for reuse
- - Swift relies more heavily on protocols and extensions
-  - this avoids many of the pitfalls that come with traditional OO
-  - is safer because avoids mutability
-  - more performant because value semantics are used over reference
-  - lets dive deeper and see how it works
+- what are some of the challenges with inheritance?
  */
 
 // The problem with classes
 // - implicit sharing (whole mutability problem)
 // - deep complex object graphs (show UIKit WWDC bob blog)
 
-class AA {}
-class BB: AA {}
 
 // which causes us get very defensive with our codeto:
 
@@ -60,9 +62,6 @@ protocol Entity {
     static func uid() -> String
 }
 
-// What if we want to define a default implementation? Can't / don't want inheritance.
-// Provide default implementation (that all conforming implementations will inherit) via extension
-
 // Provide default implementation via extensions
 
 extension Entity {
@@ -80,16 +79,15 @@ struct Order: Entity {
 let order = Order(name: "My Order")
 print(order.uid)
 
-// Add further requirements by extending existing protocols (Swift version of inheritance).
+// Add further requirements by extending existing protocols (Swift version of inheritance)
 
 protocol Persistable: Entity {
     func write(instance: Entity, to filePath: String)
     init?(by uid: String)
 }
 
-// Note: You can do this with any type (Int, Double, other library). You don't need the source code.
-
-// Then you only implement what you need - fine grained shallow interfaces
+// Note: You can do this with any type (Int, Double, other library). You don't even need the source code
+// Then you only implement what you need.
 
 // The whole thing
 
