@@ -111,6 +111,13 @@ struct InMemoryEntity: Entity {
 
 // An example in an App
 
+// Advice
+// - I don't want you to get stressed about this stuff
+// - It is different. And I don't do protocol oriented programming all the time
+// - make it work
+// - i.e. If you need a view extend UIView. If you need a ViewController extend UIViewController
+// - UIKIt is very class based. So don't be afraid to do regular OO here.
+// - Just note that there are more Protocol Oriented ways... as you get more comfortable can try them out.
 // Summary
 
 // Swift supports both traditioal OO and Protocol Oriented Programming.
