@@ -46,7 +46,6 @@ protocol Entity {
 }
 
 // Provide default implementation via extensions
-
 extension Entity {
     static func uid() -> String {
         return UUID().uuidString
@@ -54,7 +53,6 @@ extension Entity {
 }
 
 // that everyone gets
-
 struct Order: Entity {
     var name: String
     let uid: String = Order.uid()
@@ -63,17 +61,12 @@ let order = Order(name: "My Order")
 print(order.uid)
 
 // Add further requirements by extending existing protocols (Swift version of inheritance)
-
 protocol Persistable: Entity {
     func write(instance: Entity, to filePath: String)
     init?(by uid: String)
 }
 
-// Note: You can do this with any type (Int, Double, other library). You don't even need the source code
-// Then you only implement what you need.
-
-// The whole thing
-
+// Then implement only what you want - the whole thing
 struct PersistableEntity: Persistable {
     var name: String
     func write(instance: Entity, to filePath: String) {
@@ -84,8 +77,7 @@ struct PersistableEntity: Persistable {
     }
 }
 
-// Just a part
-
+// Or just a part
 struct InMemoryEntity: Entity {
     var name: String
 }
