@@ -30,7 +30,7 @@ Pop address by being a protocol first language. That means it likes definining i
 ```swift
 // Start with a protocol
 protocol AA {} 		// Blue print - what
-extension AA {} 		// Default implementation for all instances - how
+extension AA {} 	// Default implementation for all instances - how
 struct BB: AA {} 	// Custom implementation for that instance - how
 ```
 
