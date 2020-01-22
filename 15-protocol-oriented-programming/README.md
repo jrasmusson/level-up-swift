@@ -30,7 +30,7 @@ Pop address by being a protocol first language. That means it likes definining i
 ```swift
 // Start with a protocol
 protocol AA {} 		// Blue print - what
-extension AA {} 		// Default implementation for all instances - how
+extension AA {} 	// Default implementation for all instances - how
 struct BB: AA {} 	// Custom implementation for that instance - how
 ```
 
@@ -46,7 +46,6 @@ protocol Entity {
 }
 
 // Provide default implementation via extensions
-
 extension Entity {
     static func uid() -> String {
         return UUID().uuidString
@@ -54,7 +53,6 @@ extension Entity {
 }
 
 // that everyone gets
-
 struct Order: Entity {
     var name: String
     let uid: String = Order.uid()
@@ -63,17 +61,12 @@ let order = Order(name: "My Order")
 print(order.uid)
 
 // Add further requirements by extending existing protocols (Swift version of inheritance)
-
 protocol Persistable: Entity {
     func write(instance: Entity, to filePath: String)
     init?(by uid: String)
 }
 
-// Note: You can do this with any type (Int, Double, other library). You don't even need the source code
-// Then you only implement what you need.
-
-// The whole thing
-
+// Then implement only what you want - the whole thing
 struct PersistableEntity: Persistable {
     var name: String
     func write(instance: Entity, to filePath: String) {
@@ -84,8 +77,7 @@ struct PersistableEntity: Persistable {
     }
 }
 
-// Just a part
-
+// Or just a part
 struct InMemoryEntity: Entity {
     var name: String
 }
@@ -105,7 +97,7 @@ Here is an example.
 
 ### Working wit UIKit
 
-![TableView](https://github.com/jrasmusson/ios-starter-kit/blob/master/basics/UIScrollView/images/demo.gif)
+![TableView](https://github.com/jrasmusson/level-up-swift/blob/master/15-protocol-oriented-programming/images/demo.gif)
 
 The classical OO inheritance way of making the textField and button shake would be to extend `UITextField` and `UIButton` and add the animation code there.
 
