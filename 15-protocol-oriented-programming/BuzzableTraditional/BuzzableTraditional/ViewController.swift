@@ -78,8 +78,4 @@ extension ViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true;
     }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Check textfield")
-    }
 }

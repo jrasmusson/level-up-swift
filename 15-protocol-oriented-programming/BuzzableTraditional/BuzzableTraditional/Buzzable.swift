@@ -38,7 +38,9 @@ import UIKit
 
 // Protocol Oriented
 
-protocol Buzzable {} // 1. Define protocol.
+protocol Buzzable { // 1. Define protocol.
+    func buzz()
+}
 
 extension Buzzable where Self: UIView { // 2. Offer default implementation.
   func buzz() {

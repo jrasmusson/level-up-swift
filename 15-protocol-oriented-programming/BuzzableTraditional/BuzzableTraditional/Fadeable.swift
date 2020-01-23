@@ -8,7 +8,9 @@
 
 import UIKit
 
-protocol Fadeable {}
+protocol Fadeable {
+    func fade()
+}
 
 extension Fadeable where Self: UIView {
     func fade() {
