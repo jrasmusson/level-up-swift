@@ -196,8 +196,29 @@ For that we have @escaping closures.
 
 ### Closures are non-escaping by default
 
-Closures are non escaping by default. Meaning if you want your closure to remain, you have to be explicit about it. Closures were made non escaping by default for safety (non-escaping closures can’t create retain cycles) and speed (compiler can optimize non-escaping closures better because they don’t strongly reference objects). The compiler doesn’t need to store these objects in a way that allows it to access them later.
+Closures are non escaping by default. Meaning if you want your closure to remain, you have to be explicit about it and include the `@escaping` keyword. Closures were made non escaping by default for safety (non-escaping closures can’t create retain cycles) and speed (compiler can optimize non-escaping closures better because they don’t strongly reference objects). The compiler doesn’t need to store these objects in a way that allows it to access them later.
 
+In this example, dispatching off the main UI thread ensures the closure will be retained and executed _after_ the method completes. Hense the need for `@escaping`.
+
+```swift
+import Foundation
+
+// non-escaping (default) - nothing retained, closure executes immediately
+func macICanBuy(budget: Int, closure: @escaping (String) -> Void) {
+    closure("Big Mac")
+}
+
+// escaping - closure retained, @escaping makes explicit
+func macICanBuy(budget: Int, closure: @escaping (String) -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+        closure("Big Mac")
+    })
+}
+
+macICanBuy(budget: 100, closure: { mac in
+    print("I can afford a \(mac)")
+})
+```
 
 ### The Risks of Wrongly Escaping Closures
 
