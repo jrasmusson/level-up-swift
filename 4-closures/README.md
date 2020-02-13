@@ -325,6 +325,7 @@ var sum = numbers4.reduce(0) { $0 + $1 } // 15
 - [Autoclosure Sundell](https://www.swiftbysundell.com/articles/using-autoclosure-when-designing-swift-apis/)
 - [Map/Filter/Reduce Use Your Loaf](https://useyourloaf.com/blog/swift-guide-to-map-filter-reduce/)
 - [Learn App Making](https://learnappmaking.com/escaping-closures-swift/)
+- [What is escaping closure](https://fluffy.es/what-is-escaping-closure/)
 
 
 
