@@ -74,7 +74,7 @@ reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1
 ```
 ### Inferring Type From Context
 
-Because sorting closure is passed as an argument to a method, Swift can infer the types of its parameters and the type of the value it returns. The _sorted(by:) method is called on an array of strings, so its argument must be of function of type _(String, String) -> Bool_. That means the _(String, String) and _Bool_ types do not need to be written as a part of the closure expressions’s definition. Because all the types can be inferred, the return arrow (->) and the parentheses around the names of the parameters can also be omitted.
+Because sorting closure is passed as an argument to a method, Swift can infer the types of its parameters and the type of the value it returns. The _sorted(by:)_ method is called on an array of strings, so its argument must be of function of type _(String, String) -> Bool_. That means the _(String, String)_ and _Bool_ types do not need to be written as a part of the closure expressions’s definition. Because all the types can be inferred, the return arrow (->) and the parentheses around the names of the parameters can also be omitted.
 
 ```swift
 reversedNames = names.sorted(by: { s1, s2 in return s1 > s2 } )
