@@ -30,7 +30,7 @@ Swifts standard library provides a method called _sorted(by:)_ which sorts an ar
 let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
 ```
 
-The sorted(by:) method accepts a closure that takes two arguments of the same type as the array’s contents and returns a _Bool_ value to say whether the first value should appear before or after the second.
+The _sorted(by:)_ method accepts a closure that takes two arguments of the same type as the array’s contents and returns a _Bool_ value to say whether the first value should appear before or after the second.
 
 ```swift
 (String, String) -> Bool
@@ -52,7 +52,7 @@ But this is long winded. A better way is as follows.
 
 Closure expression syntax has the following general form:
 
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/closures/images/closure.png" alt="drawing" width="400"/>
+<img src="https://github.com/jrasmusson/level-up-swift/blob/master/4-closures/images/closure.png" alt="drawing" width="400"/>
 
 
 And you can inline closures into functions and methods like this.
