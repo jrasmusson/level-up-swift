@@ -201,9 +201,9 @@ Closures are non escaping by default. Meaning if you want your closure to remain
 
 ### The Risks of Wrongly Escaping Closures
 
-If you are not careful with escaping closures you can get these things called retain cycles. Retain cycles are where your closure has a strong reference to an object it references (often self) and self as a reference to the underlying closure. They point to each other. And neither is willing to let go resulting in a memory leak.
+If you are not careful with escaping closures you can get these things called retain cycles. Retain cycles are where your closure has a strong reference to an object it references (often self) and self has a reference to the underlying closure. They point to each other. And neither is willing to let go resulting in a memory leak.
 
-We break this retain cyle in escaping closes by leverage a `capture list`. This explicitly tells the closure to wekaly hold onto either `self` (most common) or any other object you don't want it to keep a strong reference to.
+We break this retain cyle in escaping closures by leveraging a `capture list`. This explicitly tells the closure to weakly hold onto either `self` (most common) or any other object you don't want it to keep a strong reference to.
 
 ```swift
 { [weak airmail] (apples) -> Void in
