@@ -30,7 +30,7 @@ Swifts standard library provides a method called _sorted(by:)_ which sorts an ar
 let names = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
 ```
 
-The sorted(by:) method accepts a closure that takes two arguments of the same type as the array’s contents and returns a _Bool_ value to say whether the first value should appear before or after the second.
+The _sorted(by:)_ method accepts a closure that takes two arguments of the same type as the array’s contents and returns a _Bool_ value to say whether the first value should appear before or after the second.
 
 ```swift
 (String, String) -> Bool
@@ -52,7 +52,7 @@ But this is long winded. A better way is as follows.
 
 Closure expression syntax has the following general form:
 
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/closures/images/closure.png" alt="drawing" width="400"/>
+<img src="https://github.com/jrasmusson/level-up-swift/blob/master/4-closures/images/closure.png" alt="drawing" width="400"/>
 
 
 And you can inline closures into functions and methods like this.
@@ -74,7 +74,7 @@ reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in return s1
 ```
 ### Inferring Type From Context
 
-Because sorting closure is passed as an argument to a method, Swift can infer the types of its parameters and the type of the value it returns. The _sorted(by:) method is called on an array of strings, so its argument must be of function of type _(String, String) -> Bool_. That means the _(String, String) and _Bool_ types do not need to be written as a part of the closure expressions’s definition. Because all the types can be inferred, the return arrow (->) and the parentheses around the names of the parameters can also be omitted.
+Because sorting closure is passed as an argument to a method, Swift can infer the types of its parameters and the type of the value it returns. The _sorted(by:)_ method is called on an array of strings, so its argument must be of function of type _(String, String) -> Bool_. That means the _(String, String)_ and _Bool_ types do not need to be written as a part of the closure expressions’s definition. Because all the types can be inferred, the return arrow (->) and the parentheses around the names of the parameters can also be omitted.
 
 ```swift
 reversedNames = names.sorted(by: { s1, s2 in return s1 > s2 } )
@@ -196,14 +196,35 @@ For that we have @escaping closures.
 
 ### Closures are non-escaping by default
 
-Closures are non escaping by default. Meaning if you want your closure to remain, you have to be explicit about it. Closures were made non escaping by default for safety (non-escaping closures can’t create retain cycles) and speed (compiler can optimize non-escaping closures better because they don’t strongly reference objects). The compiler doesn’t need to store these objects in a way that allows it to access them later.
+Closures are non escaping by default. Meaning if you want your closure to remain, you have to be explicit about it and include the `@escaping` keyword. Closures were made non escaping by default for safety (non-escaping closures can’t create retain cycles) and speed (compiler can optimize non-escaping closures better because they don’t strongly reference objects). The compiler doesn’t need to store these objects in a way that allows it to access them later.
 
+In this example, dispatching off the main UI thread ensures the closure will be retained and executed _after_ the method completes. Hense the need for `@escaping`.
+
+```swift
+import Foundation
+
+// non-escaping (default) - nothing retained, closure executes immediately
+func macICanBuy(budget: Int, closure: @escaping (String) -> Void) {
+    closure("Big Mac")
+}
+
+// escaping - closure retained, @escaping makes explicit
+func macICanBuy(budget: Int, closure: @escaping (String) -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+        closure("Big Mac")
+    })
+}
+
+macICanBuy(budget: 100, closure: { mac in
+    print("I can afford a \(mac)")
+})
+```
 
 ### The Risks of Wrongly Escaping Closures
 
-If you are not careful with escaping closures you can get these things called retain cycles. Retain cycles are where your closure has a strong reference to an object it references (often self) and self as a reference to the underlying closure. They point to each other. And neither is willing to let go resulting in a memory leak.
+If you are not careful with escaping closures you can get these things called retain cycles. Retain cycles are where your closure has a strong reference to an object it references (often self) and self has a reference to the underlying closure. They point to each other. And neither is willing to let go resulting in a memory leak.
 
-We break this retain cyle in escaping closes by leverage a `capture list`. This explicitly tells the closure to wekaly hold onto either `self` (most common) or any other object you don't want it to keep a strong reference to.
+We break this retain cyle in escaping closures by leveraging a `capture list`. This explicitly tells the closure to weakly hold onto either `self` (most common) or any other object you don't want it to keep a strong reference to.
 
 ```swift
 { [weak airmail] (apples) -> Void in
@@ -325,6 +346,7 @@ var sum = numbers4.reduce(0) { $0 + $1 } // 15
 - [Autoclosure Sundell](https://www.swiftbysundell.com/articles/using-autoclosure-when-designing-swift-apis/)
 - [Map/Filter/Reduce Use Your Loaf](https://useyourloaf.com/blog/swift-guide-to-map-filter-reduce/)
 - [Learn App Making](https://learnappmaking.com/escaping-closures-swift/)
+- [What is escaping closure](https://fluffy.es/what-is-escaping-closure/)
 
 
 
