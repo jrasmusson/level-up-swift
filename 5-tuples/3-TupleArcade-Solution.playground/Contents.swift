@@ -17,6 +17,15 @@
  
 */
 
+func getStatusCode() -> (code: Int, description: String) {
+    return (400, "Not found")
+}
+
+let status = getStatusCode()
+status.0
+status.1
+status.code
+status.description
 
 
 /*
@@ -33,4 +42,25 @@
  
 */
 
+let flight = (airport: "Calgary", airplane: "222")
 
+print("Flight \(flight.airplane) from \(flight.airport) is ready for take off!")
+
+/*
+🕹 Bonus - tuples can be used to parse array loops
+ */
+
+let drivers = ["Magnussen", "Raikkonen", "Hamilton", "Verstappen"]
+
+for (index, name) in drivers.enumerated()
+{
+    print("\(name) has position \(index)")
+}
+
+drivers.enumerated().map {
+    print($0) // tuple
+}
+
+drivers.enumerated().map {
+    print("\($0.0) has position \($0.1)")
+}
