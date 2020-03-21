@@ -25,7 +25,12 @@ func printStringArray(_ array:[String]) {
     array.map { print($0) } // loop through the array and print all values
 }
 
-// your new generic method here...
+func printAnyArray<T>(_ array:[T]) {
+    array.map { print($0) } // loop through the array and print all values
+}
+
+printAnyArray(intArray)
+printAnyArray(stringArray)
 
 
 /*
@@ -37,6 +42,17 @@ func printStringArray(_ array:[String]) {
 
  */
 
+func middleValue<T: Comparable>(_ array: [T]) -> T? {
+    guard !array.isEmpty else { return nil }
+    let sorted = array.sorted()
+    return sorted[(array.count - 1) / 2]
+}
+
+let unsortedArrayInts = [2, 1, 3]
+let unsortedArrayStrings = ["b", "c", "a"]
+
+print(middleValue(unsortedArrayInts)!) // 2
+print(middleValue(unsortedArrayStrings)!) // b
 
 /*
 🕹 Stack anything.
@@ -60,4 +76,22 @@ intOnlyStack.push(1)
 intOnlyStack.push(2)
 intOnlyStack.push(3)
 
-// your generic Stack here...
+struct Stack<Element> {
+    var items = [Element]()
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    mutating func pop() -> Element {
+        return items.removeLast()
+    }
+}
+
+var stackOfStrings = Stack<String>()
+stackOfStrings.push("uno")
+stackOfStrings.push("dos")
+stackOfStrings.push("tres")
+
+var stackOfInts = Stack<Int>()
+stackOfInts.push(1)
+stackOfInts.push(2)
+stackOfInts.push(3)
