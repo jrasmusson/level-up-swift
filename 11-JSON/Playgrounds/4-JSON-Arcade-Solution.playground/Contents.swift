@@ -22,6 +22,14 @@ let json1 = """
 }
 """
 
+struct Coordinate: Codable {
+    var latitude: Double
+    var longitude: Double
+}
+
+let data1 = json1.data(using: .utf8)!
+let result1 = try! JSONDecoder().decode(Coordinate.self, from: data1)
+print(result1)
 
 /*
 🕹 Associate it with a Planet.
@@ -41,6 +49,15 @@ let json2 = """
  }
 """
 
+struct Planet: Codable {
+    var name: String
+    var foundingYear: Int
+    var location: Coordinate
+}
+
+let data2 = json2.data(using: .utf8)!
+let result2 = try! JSONDecoder().decode(Planet.self, from: data2)
+print(result2)
 
 /*
 🕹 Use the force.
@@ -62,3 +79,19 @@ let json3 = """
      },
  }
 """
+
+struct OtherPlanet: Codable {
+    var name: String
+    var foundingYear: Int
+    var location: Coordinate
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "planet_name"
+        case foundingYear = "founding_year"
+        case location
+    }
+}
+
+let data3 = json3.data(using: .utf8)!
+let result3 = try! JSONDecoder().decode(OtherPlanet.self, from: data3)
+print(result3)
