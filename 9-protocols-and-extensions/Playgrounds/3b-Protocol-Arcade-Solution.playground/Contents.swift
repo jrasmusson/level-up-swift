@@ -42,7 +42,7 @@
  
  Using the Protocol Delegate pattern, create a service that informs General Tarkin in the Command Center when the Death Star's primary canon is ready to fire.
  
- In now particular order you will need to:
+ In no particular order you will need to:
   - Create the protocol.
   - Create the service.
   - Create the Command Center.
