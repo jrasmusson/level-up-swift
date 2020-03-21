@@ -15,9 +15,6 @@ import Foundation
 
  */
 
-enum BillError: Error {
-    case negativeAmount
-}
 
 /*
 🕹 Bad Bill - throws.
@@ -28,30 +25,6 @@ enum BillError: Error {
 
  */
 
-func payBill(_ amount: Double) throws {
-    if amount < 0 {
-        throw BillError.negativeAmount
-    }
-
-    print("Bill payed: $\(amount)")
-}
-
-// x3 ways we can call
-
-do {
-    try payBill(-1)
-} catch {
-    print("Error paying bill")
-    // Show error message
-}
-
-// try? - Optional
-try? payBill(1)
-try? payBill(-1)
-
-// try! - Forced
-try! payBill(1)
-// try! payBill(-1) // 💥
 
 
 
@@ -65,28 +38,3 @@ try! payBill(1)
 
  */
 
-func payBill2(_ amount: Double) {
-    assert(amount > 0, "Amount can't be negative") // Debug
-//    precondition(amount > 0, "Amount can't be negative") // Release 💥
-    print("Bill payed: $\(amount)")
-}
-
-payBill2(1)
-//payBill2(-1)
-
-/*
- Discussion:
-
- - Advantages of throwing
-  - Can signal to client why call failed (more precise error handling).
-  - Useful for client input.
-  - Use if expected and may need to react
-
- - Advantages of asserting
-  - Good for unexpected programming errors when situation really should not have happened
-  - Bug on your part
-  - Good to use when developing (can stop and fix bug immediately)
-  - Can then decide whether
-   - Stop only in degug builds (assertion)
-   - Stop in release builds/production (precondition/fatal)
- */
