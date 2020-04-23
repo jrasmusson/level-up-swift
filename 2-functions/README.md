@@ -263,6 +263,15 @@ let command = Command()
 command.execute(twoIntEquation: Math().addTwoInts(_:_:))
 ```
 
+If your func expression is complicated use a `typealias`.
+
+```swift
+struct Calculator {
+    typealias expression = (Int, Int) -> Int
+    var mathFunction: expression = Math().addTwoInts
+}
+```
+
 ### Links that help
 
 - [Swift Functions](https://docs.swift.org/swift-book/LanguageGuide/Functions.html)
