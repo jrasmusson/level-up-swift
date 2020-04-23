@@ -216,6 +216,52 @@ print("zero!")
 // zero!
 ```
 
+## Functions as variables
+
+Functions can be instantiated and passed around like any other variable. This can be handy in testing (no need to mock an object in it's entirety) or flexible API that take _func_s instead of classes, structs, and enums.
+
+Here for example we define a _Math_ struct with a func called _addTwoInts_. Think of this func definition just like any other Swift _var_ or _let_. 
+
+```swift
+import UIKit
+
+struct Math {
+
+    // think of this as a variable
+    func addTwoInts(_ a: Int, _ b: Int) -> Int {
+        return a + b
+    }
+
+    // just like any other var or let
+    var name = "Math 101"
+}
+```
+
+We can then define it as a variable type in a class. And change it's value.
+
+```swift
+struct Calculator {
+    var mathFunction: (Int, Int) -> Int = Math().addTwoInts
+}
+
+var calc = Calculator()
+calc.mathFunction = Math().subTwoInts
+```
+
+Or we can use it as an argument and pass it to other functions.
+
+```swift
+struct Command {
+
+    func execute(twoIntEquation: (Int, Int) -> Int) {
+        let answer = twoIntEquation(1, 2)
+        print("\(answer)")
+    }
+}
+
+let command = Command()
+command.execute(twoIntEquation: Math().addTwoInts(_:_:))
+```
 
 ### Links that help
 
