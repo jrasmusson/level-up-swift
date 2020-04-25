@@ -218,7 +218,7 @@ print("zero!")
 
 ## Functions as variables
 
-Functions can be instantiated and passed around like any other variable. This can be handy in testing (no need to mock an object in it's entirety) or flexible API that take _func_s instead of classes, structs, and enums.
+Functions can be instantiated and passed around like any other variable. This can be handy in testing (no need to mock an object in it's entirety) or flexible API that take a _func_ instead of classes, structs, and enums.
 
 Here for example we define a _Math_ struct with a func called _addTwoInts_. Think of this func definition just like any other Swift _var_ or _let_. 
 
