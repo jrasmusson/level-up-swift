@@ -187,6 +187,51 @@ let sunsetDirection = CompassPoint.west.rawValue
 // sunsetDirection is "west"
 ```
 
+## Enums & Protocol
+
+Enums can gain a lot of extra functionality by implementing various _protocols_. Here are some examples.
+
+### Indexed Enum as String
+
+`CustomStringConvertible` is for when you want a special String representation for your _enum_. Just implement the computed variable `description`.
+
+`CaseIterable` is for when you want an iterator for all your _enum_ cases.
+
+```swift
+enum Category: Int, CustomStringConvertible, CaseIterable {
+    case games = 0
+    case music
+    case movies
+    case books
+    case hotels
+    case cars
+    case shopping
+    case restuarants
+
+    var description : String {
+      switch self {
+      case .games: return "Games"
+      case .music: return "Music"
+      case .movies: return "Movies"
+      case .books: return "Books"
+      case .hotels: return "Hotels"
+      case .cars: return "Cars"
+      case .shopping: return "Shopping"
+      case .restuarants: return "Restuarants"
+        }
+    }
+}
+
+var tabTiles: [TabView] {
+    Category.allCases.map {
+        let tabView = TabView()
+        tabView.label.text = $0.description
+        return tabView
+    }
+}
+```
+
+
 ### Links that help
 
 - [Swift Enumerations](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html)
