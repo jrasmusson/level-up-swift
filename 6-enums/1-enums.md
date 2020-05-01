@@ -193,9 +193,8 @@ Enums can gain a lot of extra functionality by implementing various _protocols_.
 
 ### Indexed Enum as String
 
-`CustomStringConvertible` is for when you want a special String representation for your _enum_. Just implement the computed variable `description`.
-
-`CaseIterable` is for when you want an iterator for all your _enum_ cases.
+- `CustomStringConvertible` is for when you want a special String representation for your _enum_. 
+- `CaseIterable` is for when you want an iterator for all your _enum_ cases.
 
 ```swift
 enum Category: Int, CustomStringConvertible, CaseIterable {
