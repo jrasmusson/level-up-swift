@@ -242,6 +242,36 @@ UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { 
 })
 ```
 
+#### Strong Reference & Capture Lists
+
+When you see a capture list like this, what it is really saying is something was strongly captured outside the closure, and we are making it weakly available within the closure to avoid a memory leak.
+
+```swift
+[weak database] 
+ ```
+A capture list is a comma-separated list of variable names, prepended with weak or unowned, and wrapped in square brackets. Some examples:
+
+```swift
+[weak self]
+[unowned navigationController]
+[unowned self, weak database]
+```
+
+You use a capture list to specify that a particular captured value needs to be referenced as `weak` or `unowned`. Both `weak` and `unowned` break the strong reference cycle, so the closure won’t hold on to the captured object.
+
+Here’s what they mean:
+
+- The weak keyword indicates that the captured value can become nil
+- The unowned keyword indicates that the captured value never becomes nil
+- Both weak and unowned are the opposite of a strong reference, with the difference that weak indicates a variable that can become nil at some point.
+
+You typically use `unowned` when the closure and the captured value will always refer to each other, and will always be deallocated at the same time. An example is `[unowned self]` in a view controller, where the closure will never outlive the view controller.
+
+You typically use `weak` when the captured value at some point becomes nil. This can happen when the closure outlives the context it was created in, such as a view controller that’s deallocated before a lengthy task is completed. As a result, the captured value is an optional.
+
+The concept of capturing, capture lists and memory management is tricky. It’s not that complicated, but I think it’s just hard to visualize such an abstract concept. In practical iOS development, the most common capture list is `[weak self]` or `[unowned self]`.
+
+Good explaination [here](https://learnappmaking.com/closures-swift-how-to/#strong-references-capture-lists).
 
 ## Autoclosures
 
