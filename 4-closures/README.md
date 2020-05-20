@@ -261,9 +261,9 @@ You use a capture list to specify that a particular captured value needs to be r
 
 Here’s what they mean:
 
-- The weak keyword indicates that the captured value can become nil
-- The unowned keyword indicates that the captured value never becomes nil
-- Both weak and unowned are the opposite of a strong reference, with the difference that weak indicates a variable that can become nil at some point.
+- The `weak` keyword indicates that the captured value can become `nil`
+- The `unowned` keyword indicates that the captured value never becomes `nil`
+- Both `weak` and `unowned` are the opposite of a strong reference, with the difference that weak indicates a variable that can become `nil` at some point.
 
 You typically use `unowned` when the closure and the captured value will always refer to each other, and will always be deallocated at the same time. An example is `[unowned self]` in a view controller, where the closure will never outlive the view controller.
 
