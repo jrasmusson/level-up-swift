@@ -18,8 +18,6 @@ Think of optional as a wrapper. It’s like a gift box which wraps the value ins
 
 ![](images/example2.png)
 
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/optionals/images/example2.png" alt="drawing" width="600"/>
-
 ## Why do we need them?
 
 Optionals are Swift’s way of dealing with something that has plagued the computing language for decades. How to deal with values that are _nil_ or _null_.
@@ -46,8 +44,7 @@ So that’s what Optionals are and why we use them. Now let’s look at some of 
 
 ## How to unwrap Optionals
 
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/optionals/images/unwrapping.png" alt="drawing" width="600"/>
-
+![](images/unwrapping.png)
 
 There are two ways we generally unwrap Optionals. We can unwrap them nicely using the question mark (Optional binding, Nil-Coalescing, Option Chaining). Or we can force an unwrap hard with an exclamation mark.
 
