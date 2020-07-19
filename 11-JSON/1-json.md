@@ -1,6 +1,6 @@
 # JSON
 
-The key to parsing JSON is Swift are the JSONEncoder and JSONDecod
+The key to parsing JSON in Swift is the JSONEncoder and JSONDecoder.
 
 ## JSON > Swift
 
