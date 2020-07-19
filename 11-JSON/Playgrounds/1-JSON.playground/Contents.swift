@@ -15,7 +15,7 @@ let json = """
  }
 """
 
-// JSON > Swift (struct, class, or enum)
+// JSON > Swift (struct or class)
 
 struct Modem: Codable {
     let type: String
