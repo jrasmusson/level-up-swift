@@ -67,7 +67,7 @@ This checkmark row views are stored in a `UIStackViewController` called `listVie
     class ActivateViewController: UIViewController {
        ...
        
-           @objc func didTapListItem(_ recognizer: UITapGestureRecognizer) {
+    @objc func didTapListItem(_ recognizer: UITapGestureRecognizer) {
         guard let currentView = recognizer.view as? ActivationCheckmarkView else { return }
         guard let index = listView.arrangedSubviews.firstIndex(of: currentView) else { return }
         
