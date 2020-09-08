@@ -56,7 +56,7 @@ class ActivationCheckmarkView: UIView {
     }
 ```
     
-    OK so that's pretty cool. Capturing style state in the form of an enum, and then using it to style a row. But we can take it farther than that. Look what happens in the view controller, holding this view, when we tap a row.
+OK so that's pretty cool. Capturing style state in the form of an enum, and then using it to style a row. But we can take it farther than that. Look what happens in the view controller, holding this view, when we tap a row.
     
 ## Enums for State
 
