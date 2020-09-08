@@ -1,6 +1,6 @@
 # Enums for Style and State
 
-![table](/images/enums-style-state-demo.gif)
+![table](images/enums-style-state-demo.gif)
 
 I recently had to build a view that enabled a user to walk down a tappable list, and then walk back up selecting and deselecting view components as he or she went. Taking some inspiration from by buddy Dan, I solved this using enums, and in this post I would like to show you how.
 
