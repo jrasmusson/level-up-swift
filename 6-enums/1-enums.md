@@ -77,7 +77,7 @@ default:
 
 ## Associated Values
 
-Sometimes it is convenient to values to enum cases. These are called _associated values_.
+Sometimes it is convenient to assign values to enum cases. These are called _associated values_.
 
 ```swift
 enum Barcode {
