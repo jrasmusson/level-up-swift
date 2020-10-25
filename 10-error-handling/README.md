@@ -44,6 +44,7 @@ class EnrollmentHandler {
         } catch {
             print("Unknown error")
         }
+    }
 }
 ```
 
