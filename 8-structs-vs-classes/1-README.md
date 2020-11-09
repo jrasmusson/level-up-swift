@@ -59,10 +59,6 @@ You can change the value of the copy, without affecting the original.
 cinema.width = 2048
 ```
 
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/structs-vs-classes/images/value.png" alt="drawing" width="800"/>
-
-
-
 ## Classes are reference types
 
 Not so with classes. When you create another instance of a class, you point to the same instance you were created from (note: no default constructor).
@@ -81,10 +77,6 @@ And when you change a property on one, it affects the others.
 let alsoTenEighty = tenEighty
 alsoTenEighty.frameRate = 30.0
 ```
-
-<img src="https://github.com/jrasmusson/level-up-ios/blob/master/mechanics/structs-vs-classes/images/reference.png" alt="drawing" width="800"/>
-
-
 
 ### Identity Operators
 
