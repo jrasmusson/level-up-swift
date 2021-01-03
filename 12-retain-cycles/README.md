@@ -33,7 +33,7 @@ Because variable types in objects are by default strong references, when Book re
 
 ### 1. Use structs.
 
-Structs are passed by value (copied). Means when a variable is passed, it's contents are copied leaving the original intact. Because there is not pointer to original, there is no retain cycle.
+Structs are passed by value (copy on write). Means when a variable is passed, it's contents are copied leaving the original intact. Because there is not pointer to original, there is no retain cycle.
 
 Classes on the other hand are passed by reference (pointers). Means when you pass a classes you are passing a pointer to the original. Having two classes holding strong references to each other is what creates the retain cycle.
 
