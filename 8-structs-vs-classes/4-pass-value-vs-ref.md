@@ -1,6 +1,6 @@
 # Passing Data by Value versus Reference
 
-Types in Swift fall into one of two categories: first _value Types_, where each instance keeps a unique copy of its data (`struct`, `enum`, or tuple). And _reference types_, where instances share a single copy of the data, and the type is usually defined as a `class`. 
+Types in Swift fall into one of two categories: first _value Types_, where each instance keeps a unique copy of its data (`struct`, `enum`, or `tuple`). And _reference types_, where instances share a single copy of the data, and the type is usually defined as a `class`. 
 
 In this section we are going to look at 
 
