@@ -22,7 +22,7 @@ When you pass by reference you are passing a pointer to an object in memory, and
 
 ## Stack vs Heap
 
-So why does any of this matter? I matters a lot because accessing memory on the stack (where values are stored) is much faster than pulling things off the heap (where references are stored).
+So why does any of this matter? Performance and safety. Accessing memory on the stack (where values are stored) is much faster than pulling things off the heap (where references are stored). There are also fewer side effects when working with copied data (on the stack) instead of passing around pointers to shared data (from the heap).
 
 <img src="https://github.com/jrasmusson/level-up-swift/blob/master/8-structs-vs-classes/images/stack-vs-heap.png" alt="drawing" width="600"/>
 
@@ -30,7 +30,7 @@ This is why Swift is so big on constants, Structs, Enums, and not so big on Clas
 
 It also leads to different style of programming - one more functional. Because all data is now copied by value, you work on data, get the result, and then throw it away. You are less worried about side effects. You don’t care what other functions or objects do with your data (because you have your own copy), and you leverage higher order functions like map, filter and reduce to get the results you want, and use less statements (if, else, switch) when programming.
 
-Just to be clear, if else and swtich statements are still core parts of the Swift language. And we use them all the time when programming. Just not in the same ways or as often as we did in more traditional OO programming. Classes are still used in Swift. And UIKit uses them extensively to store user interface state and bridge calls to Objective-C.
+Just to be clear, if else and switch statements are still core parts of the Swift language. And we use them all the time when programming. Just not in the same ways or as often as we did in more traditional OO programming. Classes are still used in Swift. And UIKit uses them extensively to store user interface state and bridge calls to Objective-C.
 
 But if you are wondering why Swift favors certain functional programming paradigms, and you are wondering why more traditional Object-Oriented constructs like classes aren’t used as much, now you know.
 
