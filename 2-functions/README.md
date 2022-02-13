@@ -115,7 +115,7 @@ These two functions two two _Int_ values, and return an _Int_ value. The type of
 
 Even functions that have no input views, and no return type have a type.
 
-```swif
+```swift
 func printHelloWorld() {
     print("hello, world")
 }
