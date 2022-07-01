@@ -313,24 +313,24 @@ And you can of course also embed arrays within arrays:
 import UIKit
 
 struct Company: Codable, Identifiable, Hashable {
-    let id: Int
+    let id: String
     let name: String
     let employees: [Employee]
 }
 
 struct Employee: Codable, Identifiable, Hashable {
-    let id: Int
+    let id: String
     let name: String
 }
 
 let json2 = """
 [
   {
-    "id": 1,
+    "id": "1",
     "name": "Apple",
     "employees": [
         {
-            "id": 1,
+            "id": "1",
             "name": "Steve",
         }
     ],
