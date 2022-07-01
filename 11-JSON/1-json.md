@@ -305,6 +305,49 @@ result2[0].amount
 result2[0].date
 ```
 
+#### Array within an Array
+
+And you can of course also embed arrays within arrays:
+
+```swift
+import UIKit
+
+struct Company: Codable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+    let employees: [Employee]
+}
+
+struct Employee: Codable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+}
+
+let json2 = """
+[
+  {
+    "id": 1,
+    "name": "Apple",
+    "employees": [
+        {
+            "id": 1,
+            "name": "Steve",
+        }
+    ],
+  }
+]
+"""
+
+let data2 = json2.data(using: .utf8)!
+let decoder2 = JSONDecoder()
+decoder2.dateDecodingStrategy = .iso8601
+let result2 = try! decoder2.decode([Company].self, from: data2)
+
+result2[0].id
+result2[0].name
+result2[0].employees[0].name
+```
+
 ### Links that help
 
 - [Apple Codable](https://developer.apple.com/documentation/foundation/archives_and_serialization/encoding_and_decoding_custom_types)
